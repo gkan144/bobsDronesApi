@@ -5,7 +5,6 @@
   "main": "./bin/app.js",
   "scripts": {
     "lint": "eslint ./src/",
-    "start-dev": "NODE_ENV='dev' node ./src/app.js",
     "start": "node ./src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
