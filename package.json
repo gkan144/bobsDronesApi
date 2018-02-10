@@ -1,0 +1,33 @@
+{
+  "name": "bobsdronesapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./bin/app.js",
+  "scripts": {
+    "lint": "eslint ./src/",
+    "start-dev": "NODE_ENV='dev' node ./src/app.js",
+    "start": "node ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gkaniouris/bobsDronesApi.git"
+  },
+  "author": "George Kaniouris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gkaniouris/bobsDronesApi/issues"
+  },
+  "homepage": "https://github.com/gkaniouris/bobsDronesApi#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "lodash": "^4.17.5"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "mocha": "^5.0.0"
+  }
+}
