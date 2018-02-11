@@ -1,15 +1,21 @@
 const express = require('express');
-const redis = require('redis');
+
+const cache = require('./lib/cacheClient');
 
 const app = express();
-const client = redis.createClient(process.env.REDIS_URL);
 
-app.get('/', (req, res) => {
+cache.initialize();
+
+app.get('/', async (req, res) => {
   console.log('Received request');
-  client.set('foo', 'bar');
-  client.get('foo', (err, data) => {
-    res.send(`Hello World! ${data}`);
-  });
+
+  try {
+    await cache.set('test', 'value');
+    const test = await cache.get('test');
+    res.send(`Hello world. Test is ${test}`);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 app.listen(3000, () => {
