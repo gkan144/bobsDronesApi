@@ -1,23 +1,26 @@
 const express = require('express');
 
-const cache = require('./lib/cacheClient');
+const cache = require('./lib/cache/cacheClient');
+const redis = require('./lib/cache/RedisCache');
+const requestHandler = require('./lib/api/requestHandler');
+const apiClient = require('./lib/api/apiClient');
+const routes = require('./routes/index');
 
 const app = express();
+cache.initialize(redis.createCache(process.env.REDIS_URL));
+apiClient.initialize(cache, requestHandler);
 
-cache.initialize();
+apiClient.initializeCacheValues()
+  .then((isCacheInitialized) => {
+    if (!isCacheInitialized) {
+      console.log('Cache has not been initialized with Bob\'s drones.');
+    }
 
-app.get('/', async (req, res) => {
-  console.log('Received request');
+    app.use('/api/v0', routes);
 
-  try {
-    await cache.set('test', 'value');
-    const test = await cache.get('test');
-    res.send(`Hello world. Test is ${test}`);
-  } catch (error) {
+    app.listen(3000, () => {
+      console.log('Bob\'s drones proxy listening on port 3000!');
+    });
+  }).catch((error) => {
     console.error(error);
-  }
-});
-
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
-});
+  });
