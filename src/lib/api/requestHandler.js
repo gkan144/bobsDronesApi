@@ -14,6 +14,19 @@ let httpClient = fetch;
  */
 const requestHandler = {
   /**
+   * Set the client object used to make the HTTP requests
+   * @param {object} newClient: A fetch api compatible client
+   */
+  setHttpClient: (newClient) => {
+    if (newClient !== null && newClient !== undefined) httpClient = newClient;
+    else throw new Error('Attempted to set client to null or undefined');
+  },
+  /**
+   * Get the http client currently used.
+   * @returns {object}
+   */
+  getHttpClient: () => httpClient,
+  /**
    * Make a single request against a url.
    * @param {string} url
    * @param {object} options: fetch api options object
@@ -40,11 +53,6 @@ const requestHandler = {
     }
     return null;
   },
-  /**
-   * Set the client object used to make the HTTP requests
-   * @param {object} newClient: A fetch api compatible client
-   */
-  setHttpClient: (newClient) => { httpClient = newClient; },
 };
 
 module.exports = requestHandler;
