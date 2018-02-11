@@ -4,7 +4,7 @@ const apiClient = require('../../lib/api/apiClient');
 const router = express.Router();
 
 router.get('/:droneId', async (req, res) => {
-  const {droneId} = req.params;
+  const { droneId } = req.params;
   console.log(`*** Received request for /drones/${droneId}`);
   try {
     const {
