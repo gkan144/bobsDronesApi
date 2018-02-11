@@ -18,8 +18,8 @@ apiClient.initializeCacheValues()
 
     app.use('/api/v0', routes);
 
-    app.listen(3000, () => {
-      console.log('Bob\'s drones proxy listening on port 3000!');
+    app.listen(process.env.PORT, () => {
+      console.log(`Bob's drones proxy listening on port ${process.env.PORT}!`);
     });
   }).catch((error) => {
     console.error(error);
