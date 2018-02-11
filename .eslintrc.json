@@ -1,4 +1,10 @@
 {
+  "plugins": [
+    "mocha"
+  ],
+  "env": {
+    "mocha": true
+  },
   "extends": "airbnb-base",
   "parserOptions": {
     "ecmaVersion": 8,
