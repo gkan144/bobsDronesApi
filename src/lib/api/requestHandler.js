@@ -1,9 +1,33 @@
 const fetch = require('node-fetch');
 
 let httpClient = fetch;
-
+/**
+ * Wrapper object for a fetch api compatible library. Provides methods for making HTTP requests
+ * against an unreliable api.
+ * @type {
+ *   {
+ *     send: function(string, object): Promise<object>,
+ *     sendUnreliable: function(string, object, number),
+ *     setHttpClient: function(object)
+ *   }
+ * }
+ */
 const requestHandler = {
+  /**
+   * Make a single request against a url.
+   * @param {string} url
+   * @param {object} options: fetch api options object
+   * @returns {Promise<*>}
+   */
   send: (url, options) => httpClient(url, options),
+  /**
+   * Make a request against a url. If the server responds with an error code then retry
+   * the request up to maxRetries times.
+   * @param {string} url
+   * @param {object} options: fetch api options object
+   * @param {number} maxRetries: the maximum number of times a request should be repeated.
+   * @returns {Promise<*>}
+   */
   sendUnreliable: async (url, options, maxRetries = 5) => {
     let currentRetries = 0;
     while (currentRetries < maxRetries) {
@@ -16,6 +40,10 @@ const requestHandler = {
     }
     return null;
   },
+  /**
+   * Set the client object used to make the HTTP requests
+   * @param {object} newClient: A fetch api compatible client
+   */
   setHttpClient: (newClient) => { httpClient = newClient; },
 };
 
