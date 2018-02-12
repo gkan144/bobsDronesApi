@@ -93,6 +93,7 @@ async function getAllDrones() {
     drones = await internalCacheClient.getArrayOfObjects(getAllKey);
   }
   return {
+    responseStatus: response.status,
     fromCache,
     drones,
   };
@@ -124,6 +125,7 @@ async function getDroneById(droneId) {
       drone = await internalCacheClient.getObject(`drone-${droneId}`);
     }
     return {
+      responseStatus: response.status,
       fromCache,
       drone,
     };
