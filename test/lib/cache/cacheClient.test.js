@@ -1,5 +1,4 @@
-/* eslint-disable prefer-arrow-callback */
-/* eslint-disable func-names */
+/* eslint-disable prefer-arrow-callback,func-names */
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const sinon = require('sinon');

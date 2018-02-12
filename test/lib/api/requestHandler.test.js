@@ -1,5 +1,4 @@
-/* eslint-disable prefer-arrow-callback */
-/* eslint-disable func-names */
+/* eslint-disable prefer-arrow-callback, func-names */
 const fetch = require('node-fetch');
 const chai = require('chai');
 const sinon = require('sinon');
