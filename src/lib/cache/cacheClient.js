@@ -36,7 +36,7 @@ function validateClient() {
 function validateInput(key, value) {
   if (
     (typeof key !== 'string') ||
-    ((value !== undefined) && ((typeof value !== 'string') || (typeof value !== 'number')))
+    ((value !== undefined) && (typeof value !== 'string') && (typeof value !== 'number'))
   ) throw new Error(`Inputs are not strings: ${key} => ${value}, ${typeof key} => ${typeof value}`);
 }
 /**
