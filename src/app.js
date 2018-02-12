@@ -12,6 +12,20 @@ if (!process.env.NODE_ENV || !process.env.PORT || !process.env.REDIS_URL) {
 }
 
 const app = express();
+const mainPageHtml = `
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Bob's Drones API</title>
+  <meta name="description" content="Bob's Drones API">
+  <meta name="author" content="George Kaniouris">
+</head>
+<body>
+  <a href="/api/v0/drones">See all drones</a>
+</body>
+</html>       
+`;
 // Initialize the cache client
 cache.initialize(redis.createCache(process.env.REDIS_URL));
 // Initialize the api client
@@ -24,6 +38,9 @@ apiClient.initializeCacheValues()
       console.log('Cache has not been initialized with Bob\'s drones.');
     }
     app.use('/api/v0', routes);
+    app.get('/', (req, res) => {
+      res.send(mainPageHtml);
+    });
 
     app.listen(process.env.PORT, () => {
       console.log(`Bob's drones proxy listening on port ${process.env.PORT}!`);
