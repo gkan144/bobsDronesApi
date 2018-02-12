@@ -154,7 +154,7 @@ async function getArrayOfObjects(key) {
   validateClient();
   validateInput(key);
   const flatArrayFromCache = await internalClient.hgetAllAsync(key);
-  return inflateArrayOfObjects(flatArrayFromCache);
+  return flatArrayFromCache ? inflateArrayOfObjects(flatArrayFromCache) : null;
 }
 
 /**
