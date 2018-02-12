@@ -109,7 +109,7 @@ async function getAllDrones() {
  */
 async function getDroneById(droneId) {
   validateClient();
-  if (!Number.isNaN(droneId)) {
+  if (!Number.isNaN(Number(droneId))) {
     let drone = null;
     let fromCache = false;
     const url = `${baseUrl}/${baseApi}/drones/${droneId}`;
