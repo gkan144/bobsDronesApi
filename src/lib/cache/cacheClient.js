@@ -128,7 +128,7 @@ async function getObject(key) {
   validateClient();
   validateInput(key);
   const objFromCache = await internalClient.hgetAllAsync(key);
-  return stringNumbersToNumbers(objFromCache);
+  return objFromCache ? stringNumbersToNumbers(objFromCache) : objFromCache;
 }
 
 /**
