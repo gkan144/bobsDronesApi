@@ -6,8 +6,10 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   console.log('*** Received request for /drones');
   try {
-    const { fromCache, drones } = await apiClient.getAllDrones();
-    if (fromCache && drones === null) {
+    const { responseStatus, fromCache, drones } = await apiClient.getAllDrones();
+    if (responseStatus === 404 && drones === null) {
+      res.status(responseStatus).send('Not Found');
+    } else if (fromCache && drones === null) {
       console.log('*** Failed pulling from cache for drones info.');
       res.status(502).send('Bad Gateway');
     } else {
